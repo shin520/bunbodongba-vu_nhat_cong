@@ -103,7 +103,7 @@ class BranchCategory2Controller extends Controller
                 $l->save();
             }
         $data->hideshow = $request->hideshow;
-        $data->featured = $request->featured;
+        $data->featured = $request->featured ?? $data->featured;
         $data->description = $request->description;
         $data->content = $request->content;
         $data->slug = $request->slug;

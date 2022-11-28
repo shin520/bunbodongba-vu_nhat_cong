@@ -49,7 +49,7 @@
                                    @include('be.component.show_number')
                                 </th>
                                 <td>
-                                    <select data-id = {{ $item->id }} name="parent_id" class="form-control select_parent_of_child_parent select2">
+                                    {{-- <select data-id = {{ $item->id }} name="parent_id" class="form-control select_parent_of_child_parent select2">
                                         @if( $item->parent != NULL)
                                         @foreach ($parent as $p)
                                         <option {{ $p->id == $item->parent_id ? 'selected' : '' }} value="{{ $p->id }}">{{ $p->name }}</option>
@@ -60,7 +60,8 @@
                                         <option value="{{ $p->id }}">{{ $p->name }}</option>
                                         @endforeach
                                         @endif
-                                    </select>
+                                    </select> --}}
+                                    {{ $item->parent->name ?? '' }}
                                 </td>
                                 <td>
                                     @include('be.component.show_name')

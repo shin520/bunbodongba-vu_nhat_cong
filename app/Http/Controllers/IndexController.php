@@ -17,6 +17,7 @@ use App\Models\Recruitment;
 use App\Models\Setting;
 use App\Models\Slide;
 use App\Models\StaticContent;
+use App\Models\BranchCategory1;
 use DB;
 use App\Models\ProductCategory1;
 
@@ -72,13 +73,13 @@ class IndexController extends Controller
         $data['gallery_about'] = Gallery::where('parent_id', 4)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->limit(1)->get();
         return view('index.home.index', compact('data', 'master'));
     }
-    
+
     public function get_location(Request $request){
         $data = Branch::find($request->id);
         return $data;
     }
 
-    public function policy($slug){       
+    public function policy($slug){
         $data = Policy::where('slug', $slug)->FirstOrFail();
         $master =
         [
@@ -165,8 +166,8 @@ class IndexController extends Controller
         ];
         return view('index.page.recruitment-detail', compact("data", "master"));
     }
-    
-    
+
+
     public function store_contact_form(Request $request)
     {
             $secret_key = Setting::first()->captcha_secret;
@@ -203,7 +204,7 @@ class IndexController extends Controller
                     'phone' => 'required|unique:contacts',
                     'date' => 'required|date:contacts',
                     // 'people' => 'required|people:contacts',
-  
+
                 ], $lang);
                         $data_info = [
                             'number' => $request->true ?? true,
@@ -221,7 +222,7 @@ class IndexController extends Controller
                     return back()->withErrors(['captcha' => 'Captcha đã hết hạn']);
             }
     }
- 
+
 
     public function page($slug){
         $data = Page::where('slug',$slug)->FirstOrFail();
@@ -241,13 +242,19 @@ class IndexController extends Controller
             return view('index.page.about-us', compact('data', 'master', 'is_active'));
             break;
             case('contact');
-            $is_active = $data->slug;            
+            $is_active = $data->slug;
             $content = StaticContent::where('type', 'contact_content')->first();
             return view('index.page.contact', compact('data', 'content', 'master', 'is_active'));
             break;
             case('all-branch');
             $is_active = $data->slug;
-            $items = Branch::where('hideshow', true)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
+            if(request('search')){
+                $brand_cate = BranchCategory1::where('slug',request('search'))->first();
+                $items = Branch::where('parent_id', $brand_cate->id)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
+            }
+            else{
+                $items = Branch::where('hideshow', true)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
+            }
             return view('index.page.branch', compact('data', 'items', 'master', 'is_active'));
             case('all-post');
             $is_active = $data->slug;

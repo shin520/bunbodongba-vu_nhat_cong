@@ -53,7 +53,7 @@
                             @include('be.component.show_name')
                         </td>
                         <td data-label="Danh mục C1">
-                            <select data-id={{ $item->id }} name="parent_id" class="form-control select_parent select2">
+                            {{-- <select data-id={{ $item->id }} name="parent_id" class="form-control select_parent select2">
                                 @if( $item->parent != NULL)
                                 @foreach ($parent as $p)
                                 <option {{ $p->id == $item->parent_id ? 'selected' : '' }} value="{{ $p->id }}">{{
@@ -65,10 +65,11 @@
                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
                                 @endforeach
                                 @endif
-                            </select>
+                            </select> --}}
+                            {{ $item->parent->name  ?? '-'}}
                         </td>
                         <td data-label="Danh mục C2">
-                            <select data-id="{{ $item->id }}" name="parent_child_id"
+                            {{-- <select data-id="{{ $item->id }}" name="parent_child_id"
                                 class="form-control select_parent_child select2" id="show_children{{ $item->id }}">
                                 @if($item->parent_child != NULL)
                                 @foreach ($item->parent->children as $item_c)
@@ -85,10 +86,11 @@
                                 @endforeach
                                 @endif
                                 @endif
-                            </select>
+                            </select> --}}
+                            {{ $item->parent_child->name ?? '-' }}
                         </td>
                         <td data-label="Xem">
-                            @include('be.component.show_link')
+                            @include('be.component.show_link',['model'=>'branch'])
                         </td>
                         <td data-label="Hiển thị">
                             @include('be.component.show_hideshow_checkbox')

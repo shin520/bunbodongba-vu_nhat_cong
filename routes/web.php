@@ -43,7 +43,7 @@ Auth::routes([
 
   Route::get('/sitemap.xml', [App\Http\Controllers\HomeController::class, 'sitemap'])->name('sitemap');
 
-Route::prefix('admin')->middleware(['auth','2fa','active_account'])->group(function () {
+Route::prefix('admin')->middleware(['auth','active_account'])->group(function () {
 
 
     Route::get('/contactx', [App\Http\Controllers\ContactController::class, 'index'])->name('be.contact.index')->middleware('permission:xem-mail-lien-he');
@@ -164,7 +164,7 @@ Route::prefix('admin')->middleware(['auth','2fa','active_account'])->group(funct
         Route::get('/hideShow', [App\Http\Controllers\PostTypeController::class, 'hideshow'])->name('be.posttype.hideshow');
         Route::get('/changeNumber', [App\Http\Controllers\PostTypeController::class, 'changenumber'])->name('be.posttype.number');
     });
-    
+
     Route::prefix('bai-viet')->group(function () {
         Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('be.post.index')->middleware('permission:xem-bai-viet');
         Route::get('/add', [App\Http\Controllers\PostController::class, 'add'])->name('be.post.add')->middleware('permission:them-bai-viet');

@@ -1,1 +1,1 @@
-<a target="_blank" href="#"><i class="fas fa-external-link-alt"></i></a>
+<a target="_blank" href="{{ route(''.$model.'',$item->slug ?? '') }}"><i class="fas fa-external-link-alt"></i></a>
