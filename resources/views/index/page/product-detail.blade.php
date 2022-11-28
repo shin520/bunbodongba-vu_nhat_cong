@@ -7,7 +7,7 @@
                     <ol class="breadcrumb ttu shadow-sm">
                         <li class="breadcrumb-item"> <a href="{{ url('/') }}" title=""><i class="ti-home"></i> Trang chủ</a></li>
                         <li class="breadcrumb-item"> <a href="{{ route('page', $share["all_product_menu"]->slug) }}">Sản phẩm</a> </li>
-                        <li class="breadcrumb-item  {{ $data ? '' : 'd-none' }}"> <a href="">{{ $data->parent->name ?? '' }}</a> </li>
+                        <li class="breadcrumb-item {{ $data ? '' : 'd-none' }}"> <a href="">{{ $data->parent->name ?? '' }}</a> </li>
                         <li class="breadcrumb-item ">{{ $data->name }}</li>
                     </ol>
                 </nav>

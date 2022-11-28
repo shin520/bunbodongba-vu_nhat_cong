@@ -42,6 +42,7 @@
                                     @include('be.component.show_name')
                                 </td>
                                 <td>{{ $item->parent->name ?? '' }}</td>
+                                <td>{{ $item->parent->name ?? '' }}</td>
                                 <td>
                                     @include('be.component.show_hideshow_checkbox')
                                 </td>

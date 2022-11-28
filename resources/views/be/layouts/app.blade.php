@@ -100,12 +100,20 @@
     </script>
 
     <script>
-        if ($('#elm1').length) {
-            CKEDITOR.replace('elm1');
+        if ($('#url_editor').length) {
+            CKEDITOR.replace('url_editor');
             CKFinder.setupCKEditor( CKEDITOR );
         }
-        if ($('#description_new').length) {
-            CKEDITOR.replace('description_new');
+        if ($('#map_editor').length) {
+            CKEDITOR.replace('map_editor');
+            CKFinder.setupCKEditor( CKEDITOR );
+        }
+        if ($('#content_editor').length) {
+            CKEDITOR.replace('content_editor');
+            CKFinder.setupCKEditor( CKEDITOR );
+        }
+        if ($('#description_editor').length) {
+            CKEDITOR.replace('description_editor');
             CKFinder.setupCKEditor( CKEDITOR );
         }
 

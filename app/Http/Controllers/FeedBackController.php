@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\FeedBack;
 use Illuminate\Http\Request;
 
-class FeedbackController extends Controller
+class FeedBackController extends Controller
 {
     public function index(){
-        $data = FeedBack::where('feature', true)->orderby('number','asc')->orderby('id','desc')->get();
+        $data = FeedBack::where('featured', true)->orderby('number','asc')->orderby('id','desc')->get();
         return view('be.feedback.index',compact('data'));
     }
     public function add(){
@@ -25,7 +25,7 @@ class FeedbackController extends Controller
             'name' => 'required|max:100',
             'img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],$trans);
-        $data = new Feedback();
+        $data = new FeedBack();
         if($request->file('img')){
             $file= $request->file('img');
             $filename= date('YmdHi').$file->getClientOriginalName();
@@ -35,6 +35,7 @@ class FeedbackController extends Controller
         $data->description = $request->description;
         $data->content = $request->content;
         $data->number = $request->number ?? true;
+        $data->url = $request->url;
         $data->featured = $request->featured;
         $data->hideshow = $request->hideshow;
         $data->img = $filename ?? 'placeholder.png';
@@ -69,6 +70,7 @@ class FeedbackController extends Controller
         $data->description = $request->description;
         $data->content = $request->content;
         $data->number = $request->number;
+        $data->url = $request->url;
         $data->featured = $request->featured;
         $data->hideshow = $request->hideshow;
         $data->img = $filename ?? $data->img;

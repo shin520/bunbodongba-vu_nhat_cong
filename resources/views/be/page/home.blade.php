@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-6 col-6 mb-2">
                 <div class="card">
                     <div class="card-body bsd color-box bg-info bg-soft">
@@ -123,7 +123,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-md-4">
                 <div class="card mini-stats-wid color-box bg-primary bg-soft">

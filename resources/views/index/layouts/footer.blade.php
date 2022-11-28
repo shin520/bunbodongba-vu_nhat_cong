@@ -5,10 +5,7 @@
                 <div class="col-lg-4">
                     <div class="footer__title">Bún bò đông ba</div>
                     <ul>
-                        <li class="footer__content">Số điện thoại: 0842451754</li>
-                        <li class="footer__content">Địc chỉ: Lorem ipsum dolor sit sada Lorem, ipsum dolor.</li>
-                        <li class="footer__content">Email: adtiennguyen21@gmail.com</li>
-                        <li class="footer__content">Website: bunbodongba.vn</li>
+                        {!! $static['about_footer_content'] !!}
                     </ul>
                     <div class="footer__content d-flex justify-content-start gg-10">
                         <div class="footer_sns__icon">
@@ -26,16 +23,16 @@
                         <li class="footer__content">Email: adtiennguyen21@gmail.com</li>
                     </ul>
                     <div class="footer__content d-flex justify-content-center">
-                        <div class="branch_btn--open">tìm chi nhánh</div>
+                        <div class="branch_btn branch_btn--open">tìm cửa hàng</div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="footer__title">Chính sách</div>
                     <ul>
-                        <li class="footer__content">chính sách mua hàng</li>
-                        <li class="footer__content">chính sách an toàn thực phẩm</li>
-                        <li class="footer__content">chính sách giao nhận</li>
-                        <li class="footer__content">chính sách</li>
+                        @foreach ($share['policy'] as $item)
+                            <li class="footer__content"><a
+                                    href="{{ route('policy', $item->slug) }}">{{ $item->name }}</a></li>
+                        @endforeach
                     </ul>
                     <div class="footer__content d-flex justify-content-end">
                         <img class="jxl img_cover " src="https://shin520.download/Untitled-1.png" alt="">
@@ -57,10 +54,18 @@
     <a class="to_topz"><i class="fa-regular fa-up-to-line"></i></a>
 
     <div class="sns__area">
-        <div class="sns__item"><img src="https://www.iconpacks.net/icons/2/free-facebook-messenger-icon-2881-thumb.png"
-                class="img_cover" alt="zalo"></div>
-        <div class="sns__item"><img src="https://classic.vn/wp-content/uploads/2022/07/zalo-icon.png" class="img_cover"
-                alt="zalo"></div>
+        <div class="sns__item branch_btn--open">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        @foreach($share['social_network'] as $sns)
+            <div class="sns__item">
+                <a href="{{$sns->url}}">
+                    <img src="{{ asset('storage/uploads') }}/{{ $sns->img }}" class="img_cover"
+                        alt="{{$sns->name}}">
+                </a>
+            </div>
+        @endforeach
     </div>
 
     @include('index.component.view_rp')

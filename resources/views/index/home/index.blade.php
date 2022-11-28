@@ -11,8 +11,7 @@
             <div class="carousel-inner">
                 @foreach ($data['slider'] as $item)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                        <img class="d-block w-100"
-                            src="{{ asset('storage/uploads') }}/{{ $item->img }}"
+                        <img class="d-block w-100" src="{{ asset('storage/uploads') }}/{{ $item->img }}"
                             alt="{{ $item->name }}" title="{{ $item->name }}">
                     </div>
                 @endforeach
@@ -31,28 +30,28 @@
             @endif
         </div>
     </section>
-    
+
 
     <!-- MENU CHÍNH -->
     <section class="area_test">
         @if ($data['product_type']->count() > 0)
             <div class="container">
                 <div class="area_test__title mb-4">
-                    <img class="img_cover"
-                        src="https://w.ladicdn.com/s1000x450/5c7362c6c417ab07e5196b05/njryu-20220520175229.png"
-                        alt="image">
+                    <img class="img_cover" src="{{ asset('storage/uploads/202211231009backgound_title_index.png') }}"
+                        alt="{{ $data['product_type']->first()->name }}">
                     <h2 class="area_test__title--name">{{ $data['product_type']->first()->name }}</h2>
                 </div>
                 <div class="row area_test__memu">
                     @foreach ($data['product_type']->first()->product_index as $pd)
                         <div class="col-lg-4 col-6">
                             <div class="area_test__memu_item">
-                                <div class="area_test__memu_item--img">
-                                    <img class="img_cover"
-                                        src="/storage/uploads/{{$pd->img}}"
-                                        alt="image">
+                                <div class="area_test__memu_item--img img_cover__height210">
+                                    <a href="{{ route('product', $pd->slug) }}">
+                                        <img src="{{ asset('storage/uploads/') }}/{{ $pd->img }}"
+                                            alt="{{ $pd->name }}">
+                                    </a>
                                 </div>
-                                <h3 class="area_test__memu_item--name">{{ $pd->name }}</h3>
+                                <h3 class="area_test__memu_item--name"><a href="{{ route('product',$pd->slug) }}">{{ $pd->name }}</a></h3>
                                 <div class="area_test__memu_item--description">{!! $pd->description !!}</div>
                             </div>
                         </div>
@@ -74,10 +73,11 @@
             </div>
             <section class="slick_box pb-5">
                 <div class="gallery_trademark">
-                    @foreach($data['gallery_about']->first()->images_index as $gl)
-                    <div class="img">
-                        <img class="img_cover" src="{{ asset('storage/uploads/'.$gl->image)}}" alt="{{$gl->title}}">
-                    </div>
+                    @foreach ($data['gallery_about']->first()->images_index as $gl)
+                        <div class="img">
+                            <img class="img_cover" src="{{ asset('storage/uploads/' . $gl->image) }}"
+                                alt="{{ $gl->title }}">
+                        </div>
                     @endforeach
                 </div>
             </section>
@@ -88,21 +88,21 @@
         <div class="container">
             @foreach ($data['product_type']->skip(1) as $item)
                 <div class="area_test__title mb-4">
-                    <img class="img_cover"
-                        src="https://w.ladicdn.com/s1000x450/5c7362c6c417ab07e5196b05/njryu-20220520175229.png"
-                        alt="{{ $item->name }}w">
+                    <img class="img_cover" src="{{ asset('storage/uploads/202211231009backgound_title_index.png') }}"
+                        alt="{{ $item->name }}">
                     <h2 class="area_test__title--name">{{ $item->name }}</h2>
                 </div>
                 <div class="row area_test__memu">
                     @foreach ($item->product_index as $pd)
                         <div class="col-lg-4 col-6">
                             <div class="area_test__memu_item">
-                                <div class="area_test__memu_item--img">
-                                    <img class="img_cover"
-                                        src="/storage/uploads/{{$pd->img}}"
-                                        alt="image">
+                                <div class="area_test__memu_item--img img_cover__height210">
+                                    <a href="{{ route('product', $pd->slug) }}"><img
+                                            src="{{ asset('storage/uploads/') }}/{{ $pd->img }}"
+                                            alt="{{ $pd->name }}"></a>
                                 </div>
-                                <h3 class="area_test__memu_item--name">{{ $pd->name }}</h3>
+                                <h3 class="area_test__memu_item--name"><a
+                                        href="{{ route('product', $pd->slug) }}">{{ $pd->name }}</a></h3>
                                 <div class="area_test__memu_item--description">{!! $pd->description !!}</div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
             <div class="row pt-4 pb-5">
                 <div class="col-lg-6">
                     <h2 class="feed_back__title"><span>Đánh giá</span> Khách hàng trải nghiệm</h2>
-                    <div class="feed_back__sub_title">{!! $data['feedback_content'] !!}</div>
+                    <div class="feed_back__sub_title">{!! $data['feedback_content'] !!} <span><a href="{{ route('page', $share["all_feedback"]->slug) }}">Xem tất cả bài đánh giá</a></span></div>
                     <div class="row">
                         @foreach ($data['feedback_index']->skip(1) as $item)
                             <div class="col-lg-6">
@@ -128,28 +128,30 @@
                                             <div class="effect_b"></div>
                                             <div class="effect_c"></div>
                                             <div class="effect_a">
-                                                <img src="{{ asset('storage/uploads/'.$item->img) }}" alt="image">
+                                                <img src="{{ asset('storage/uploads/' . $item->img) }}" alt="image">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="feed_back__user--name">{{$item->name}}</div>
-                                    <div class="feed_back__user--description">{{$item->description}}</div>
+
+                                    <div class="btn_open_video_feedback">
+                                        <div class="feed_back__user--name">{{ $item->name }}</div>
+                                    </div>
+                                    <div class="feed_back__user--description">{{ $item->description }}</div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
-                    <div class="col-lg-6">
-                        <div class="feed_back__img">
-                            <img class="img_cover"
-                                src="{{ asset('storage/uploads/'.$data['feedback_index']->first()->img) }}"
-                                alt="image">
-                            <div class="feed_back__img--outline_a"></div>
-                            <div class="feed_back__img--outline_b"></div>
-                        </div>
-                        <h3 class="feed_back__user--name mt-4">{{$data['feedback_index']->first()->name}}</h3>
-                        <h3 class="feed_back__user--description">{{$data['feedback_index']->first()->description}}</h3>
+                <div class="col-lg-6">
+                    <div class="feed_back__img">
+                        <img class="img_cover"
+                            src="{{ asset('storage/uploads/' . $data['feedback_index']->first()->img) }}" alt="image">
+                        <div class="feed_back__img--outline_a"></div>
+                        <div class="feed_back__img--outline_b"></div>
                     </div>
+                    <h3 class="feed_back__user--name mt-4">{{ $data['feedback_index']->first()->name }}</h3>
+                    <h3 class="feed_back__user--description">{{ $data['feedback_index']->first()->description }}</h3>
+                </div>
             </div>
         </div>
     </section>
@@ -163,11 +165,12 @@
                             <h2 class="search__title"><span>Tìm kiếm</span> Quán bún bò huế ĐÔNG BA</h2>
                             <div class="search__sub">
                                 <span>Gần bạn nhất</span>
-                                <div rel="no-follow" href="" class="branch_btn--open">tìm cửa hàng</div>
+                                <div rel="no-follow" href="" class="branch_btn branch_btn--open">tìm cửa hàng
+                                </div>
                             </div>
                             @foreach ($share['branch'] as $item)
                                 <div class="location_item" data-id="{{ $item->id }}">
-                                    <div class="location_icon">♫</div>
+                                    <div class="location_icon"><i class="fa-solid fa-location-dot"></i></div>
                                     <div class="location_info">
                                         <h3 class="location_info__title">{{ $item->name }}</h3>
                                         <div class="location_info__address">{{ $item->address }}</div>
@@ -183,7 +186,7 @@
                             </div>
 
                             <div class="location_item">
-                                <div class="location_icon">♫</div>
+                                <div class="location_icon"><i class="fa-solid fa-location-dot"></i></div>
                                 <div class="location_info">
                                     <div id="dp_name" class="location_info__title">
                                         {{ $data['branch_index']->first()->name }}</div>
@@ -209,20 +212,22 @@
                             <div class="d-flex flex-column align-items-center gg-10">
                                 @csrf
                                 @if ($errors->any())
-                                <div id="error_contact" class="alert alert-danger" style="display: none">
-                                    <ul style="padding-left: 0px;">
-                                        @foreach ($errors->all() as $error)
-                                            <li style="line-height: 32px;">{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                    <div id="error_contact" class="alert alert-danger" style="display: none">
+                                        <ul style="padding-left: 0px;">
+                                            @foreach ($errors->all() as $error)
+                                                <li style="line-height: 32px;">{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 @endif
                                 <input type="hidden" name="recaptcha" id="recaptcha">
                                 <input class="input" type="text" name="name" placeholder="Họ và tên">
                                 <input class="input" type="text" name="phone" placeholder="Số điện thoại">
-                                <input class="input" type="datetime-local" name="date"placeholder="Ngày bạn ghé quán">
+                                <input class="input" type="datetime-local"
+                                    name="date"placeholder="Ngày bạn ghé quán">
                                 <input class="input" type="text" name="people" placeholder="Bàn bạn mấy người">
-                                <textarea class="input" name="branch"  placeholder="Bạn muốn đi quán nào? Tìm quán gần bạn nhất" id="" rows="3"></textarea>
+                                <textarea class="input" name="branch" placeholder="Bạn muốn đi quán nào? Tìm quán gần bạn nhất" id=""
+                                    rows="3"></textarea>
                                 <div class="text-center"><button>Đặt ngay</button></div>
                             </div>
                         </form>
@@ -265,5 +270,4 @@
             });
         });
     </script>
-
 @endpush

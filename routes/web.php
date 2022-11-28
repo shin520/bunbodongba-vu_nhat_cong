@@ -17,9 +17,14 @@ use App\Http\Controllers\AnalyticsController;
 */
 Route::get('/', [IndexController::class, 'index'])->name('index.get');
 Route::GET('/get_location', [IndexController::class, 'get_location'])->name('get_location.get');
-Route::get('/trang-{slug}.html', [IndexController::class, 'page'])->name('page');
+Route::get('/trang-{slug}', [IndexController::class, 'page'])->name('page');
 Route::get('/san-pham/{slug}.html', [IndexController::class, 'product'])->name('product');
 Route::get('/bai-viet/{slug}.html', [IndexController::class, 'post'])->name('post');
+Route::get('/chi-nhanh/{slug}.html', [IndexController::class, 'branch'])->name('branch');
+Route::get('/chinh-sach/{slug}.html', [IndexController::class, 'policy'])->name('policy');
+Route::get('/gioi-thieu/{slug}.html', [IndexController::class, 'about'])->name('about');
+Route::get('/tuyen-dung/{slug}.html', [IndexController::class, 'recruitment'])->name('recruitment');
+Route::get('/phan-hoi/{slug}.html', [IndexController::class, 'feedback'])->name('feedback');
 Route::POST('/contact-add', [IndexController::class, 'store_contact_form'])->name('store.contact');
 Route::POST('/contact', [App\Http\Controllers\HomeController::class, 'ajax_update_info_web'])->name('ajax_update_info_web');
 
@@ -159,6 +164,7 @@ Route::prefix('admin')->middleware(['auth','2fa','active_account'])->group(funct
         Route::get('/hideShow', [App\Http\Controllers\PostTypeController::class, 'hideshow'])->name('be.posttype.hideshow');
         Route::get('/changeNumber', [App\Http\Controllers\PostTypeController::class, 'changenumber'])->name('be.posttype.number');
     });
+    
     Route::prefix('bai-viet')->group(function () {
         Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('be.post.index')->middleware('permission:xem-bai-viet');
         Route::get('/add', [App\Http\Controllers\PostController::class, 'add'])->name('be.post.add')->middleware('permission:them-bai-viet');
@@ -170,6 +176,31 @@ Route::prefix('admin')->middleware(['auth','2fa','active_account'])->group(funct
         Route::get('/hideShow', [App\Http\Controllers\PostController::class, 'hideshow'])->name('be.post.hideshow')->middleware('permission:sua-bai-viet');
         Route::get('/changeNumber', [App\Http\Controllers\PostController::class, 'changenumber'])->name('be.post.number')->middleware('permission:sua-bai-viet');
     });
+    Route::prefix('tuyen-dung')->group(function () {
+        Route::get('/', [App\Http\Controllers\RecruitmentController::class, 'index'])->name('be.recruitment.index')->middleware('permission:xem-bai-viet');
+        Route::get('/add', [App\Http\Controllers\RecruitmentController::class, 'add'])->name('be.recruitment.add')->middleware('permission:them-bai-viet');
+        Route::post('/store', [App\Http\Controllers\RecruitmentController::class, 'store'])->name('be.recruitment.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\RecruitmentController::class, 'edit'])->name('be.recruitment.edit')->middleware('permission:sua-bai-viet');
+        Route::put('/update/{id}', [App\Http\Controllers\RecruitmentController::class, 'update'])->name('be.recruitment.update');
+        Route::delete('/destroy/{id}', [App\Http\Controllers\RecruitmentController::class, 'destroy'])->name('be.recruitment.destroy')->middleware('permission:xoa-bai-viet');
+        Route::get('/featured', [App\Http\Controllers\RecruitmentController::class, 'featured'])->name('be.recruitment.featured')->middleware('permission:sua-bai-viet');
+        Route::get('/hideShow', [App\Http\Controllers\RecruitmentController::class, 'hideshow'])->name('be.recruitment.hideshow')->middleware('permission:sua-bai-viet');
+        Route::get('/changeNumber', [App\Http\Controllers\RecruitmentController::class, 'changenumber'])->name('be.recruitment.number')->middleware('permission:sua-bai-viet');
+    });
+
+
+    Route::prefix('chi-nhanh')->group(function () {
+        Route::get('/', [App\Http\Controllers\BranchController::class, 'index'])->name('be.branch.index')->middleware('permission:xem-bai-viet');
+        Route::get('/add', [App\Http\Controllers\BranchController::class, 'add'])->name('be.branch.add')->middleware('permission:them-bai-viet');
+        Route::post('/store', [App\Http\Controllers\BranchController::class, 'store'])->name('be.branch.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\BranchController::class, 'edit'])->name('be.branch.edit')->middleware('permission:sua-bai-viet');
+        Route::put('/update/{id}', [App\Http\Controllers\BranchController::class, 'update'])->name('be.branch.update');
+        Route::delete('/destroy/{id}', [App\Http\Controllers\BranchController::class, 'destroy'])->name('be.branch.destroy')->middleware('permission:xoa-bai-viet');
+        Route::get('/featured', [App\Http\Controllers\BranchController::class, 'featured'])->name('be.branch.featured')->middleware('permission:sua-bai-viet');
+        Route::get('/hideShow', [App\Http\Controllers\BranchController::class, 'hideshow'])->name('be.branch.hideshow')->middleware('permission:sua-bai-viet');
+        Route::get('/changeNumber', [App\Http\Controllers\BranchController::class, 'changenumber'])->name('be.branch.number')->middleware('permission:sua-bai-viet');
+    });
+
     Route::prefix('danh-muc-cap-1')->group(function () {
         Route::get('/', [App\Http\Controllers\ProductCategory1Controller::class, 'index'])->name('be.product_category_1.index');
         Route::get('/add', [App\Http\Controllers\ProductCategory1Controller::class, 'add'])->name('be.product_category_1.add');
@@ -210,16 +241,28 @@ Route::prefix('admin')->middleware(['auth','2fa','active_account'])->group(funct
         Route::get('/update-parent-child', [App\Http\Controllers\ProductController::class, 'update_parent_child'])->name('be.product.update_parent_child');
 
         Route::delete('/delete-all-image-detail', [App\Http\Controllers\ProductController::class, 'delete_all_image_detail'])->name('be.product.delete_all_image_detail');
-
         Route::delete('/delete-single-image-detail', [App\Http\Controllers\ProductController::class, 'delete_single_image_detail'])->name('be.product.delete_single_image_detail');
-
         Route::delete('/delete-multiple-image-detail', [App\Http\Controllers\ProductController::class, 'delete_multiple_image_detail'])->name('be.product.delete_multiple_image_detail');
-
-        Route::post('/upload-image-via-ajax', [App\Http\Controllers\ProductController::class, 'uploadImageViaAjax'])->name('be.product.uploadImageViaAjax');
+        Route::post('/upload-product-image-via-ajax', [App\Http\Controllers\ProductController::class, 'uploadImageViaAjax'])->name('be.product.uploadImageViaAjax');
+        Route::post('/upload-branch-image-via-ajax', [App\Http\Controllers\BranchController::class, 'uploadImageViaAjax'])->name('be.branch.uploadImageViaAjax');
+        Route::delete('/delete-single-image-detail', [App\Http\Controllers\BranchController::class, 'delete_single_image_detail'])->name('be.branch.delete_single_image_detail');
+        Route::delete('/delete-multiple-image-detail', [App\Http\Controllers\BranchController::class, 'delete_multiple_image_detail'])->name('be.branch.delete_multiple_image_detail');
+        Route::delete('/delete-all-image-detail', [App\Http\Controllers\BranchController::class, 'delete_all_image_detail'])->name('be.branch.delete_all_image_detail');
 
         Route::post('/store-image', [App\Http\Controllers\ProductController::class, 'store_image'])->name('be.product.store_image');
 
         });
+    Route::prefix('phan-hoi')->group(function () {
+        Route::get('/', [App\Http\Controllers\FeedBackController::class, 'index'])->name('be.feedback.index');
+        Route::get('/add', [App\Http\Controllers\FeedBackController::class, 'add'])->name('be.feedback.add');
+        Route::post('/store', [App\Http\Controllers\FeedBackController::class, 'store'])->name('be.feedback.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\FeedBackController::class, 'edit'])->name('be.feedback.edit');
+        Route::put('/update/{id}', [App\Http\Controllers\FeedBackController::class, 'update'])->name('be.feedback.update');
+        Route::delete('/destroy/{id}', [App\Http\Controllers\FeedBackController::class, 'destroy'])->name('be.feedback.destroy');
+        Route::get('/featured', [App\Http\Controllers\FeedBackController::class, 'featured'])->name('be.feedback.featured');
+        Route::get('/hideShow', [App\Http\Controllers\FeedBackController::class, 'hideshow'])->name('be.feedback.hideshow');
+        Route::get('/changeNumber', [App\Http\Controllers\FeedBackController::class, 'changenumber'])->name('be.feedback.number');
+    });
     Route::prefix('chinh-sach')->group(function () {
         Route::get('/', [App\Http\Controllers\PolicyController::class, 'index'])->name('be.policy.index');
         Route::get('/add', [App\Http\Controllers\PolicyController::class, 'add'])->name('be.policy.add');
@@ -231,6 +274,17 @@ Route::prefix('admin')->middleware(['auth','2fa','active_account'])->group(funct
         Route::get('/hideShow', [App\Http\Controllers\PolicyController::class, 'hideshow'])->name('be.policy.hideshow');
         Route::get('/changeNumber', [App\Http\Controllers\PolicyController::class, 'changenumber'])->name('be.policy.number');
     });
+    Route::prefix('gioi-thieu')->group(function () {
+        Route::get('/', [App\Http\Controllers\AboutController::class, 'index'])->name('be.about.index');
+        Route::get('/add', [App\Http\Controllers\AboutController::class, 'add'])->name('be.about.add');
+        Route::post('/store', [App\Http\Controllers\AboutController::class, 'store'])->name('be.about.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\AboutController::class, 'edit'])->name('be.about.edit');
+        Route::put('/update/{id}', [App\Http\Controllers\AboutController::class, 'update'])->name('be.about.update');
+        Route::delete('/destroy/{id}', [App\Http\Controllers\AboutController::class, 'destroy'])->name('be.about.destroy');
+        Route::get('/featured', [App\Http\Controllers\AboutController::class, 'featured'])->name('be.about.featured');
+        Route::get('/hideShow', [App\Http\Controllers\AboutController::class, 'hideshow'])->name('be.about.hideshow');
+        Route::get('/changeNumber', [App\Http\Controllers\AboutController::class, 'changenumber'])->name('be.about.number');
+    });
     Route::prefix('chi-nhanh')->group(function () {
         Route::get('/', [App\Http\Controllers\BranchController::class, 'index'])->name('be.branch.index');
         Route::get('/add', [App\Http\Controllers\BranchController::class, 'add'])->name('be.branch.add');
@@ -241,6 +295,32 @@ Route::prefix('admin')->middleware(['auth','2fa','active_account'])->group(funct
         Route::get('/featured', [App\Http\Controllers\BranchController::class, 'featured'])->name('be.branch.featured');
         Route::get('/hideShow', [App\Http\Controllers\BranchController::class, 'hideshow'])->name('be.branch.hideshow');
         Route::get('/changeNumber', [App\Http\Controllers\BranchController::class, 'changenumber'])->name('be.branch.number');
+    });
+
+    Route::prefix('danh-muc-chi-nhanh-cap-1')->group(function () {
+        Route::get('/', [App\Http\Controllers\BranchCategory1Controller::class, 'index'])->name('be.branch_category_1.index');
+        Route::get('/add', [App\Http\Controllers\BranchCategory1Controller::class, 'add'])->name('be.branch_category_1.add');
+        Route::post('/store', [App\Http\Controllers\BranchCategory1Controller::class, 'store'])->name('be.branch_category_1.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\BranchCategory1Controller::class, 'edit'])->name('be.branch_category_1.edit');
+        Route::put('/update/{id}', [App\Http\Controllers\BranchCategory1Controller::class, 'update'])->name('be.branch_category_1.update');
+        Route::post('/clone/{id}', [App\Http\Controllers\BranchCategory1Controller::class, 'clone'])->name('be.branch_category_1.clone');
+        Route::delete('/destroy/{id}', [App\Http\Controllers\BranchCategory1Controller::class, 'destroy'])->name('be.branch_category_1.destroy');
+        Route::get('/featured', [App\Http\Controllers\BranchCategory1Controller::class, 'featured'])->name('be.branch_category_1.featured');
+        Route::get('/hideShow', [App\Http\Controllers\BranchCategory1Controller::class, 'hideshow'])->name('be.branch_category_1.hideshow');
+        Route::get('/changeNumber', [App\Http\Controllers\BranchCategory1Controller::class, 'changenumber'])->name('be.branch_category_1.number');
+    });
+    Route::prefix('danh-muc-chi-nhanh-cap-2')->group(function () {
+        Route::get('/', [App\Http\Controllers\BranchCategory2Controller::class, 'index'])->name('be.branch_category_2.index');
+        Route::get('/add', [App\Http\Controllers\BranchCategory2Controller::class, 'add'])->name('be.branch_category_2.add');
+        Route::post('/store', [App\Http\Controllers\BranchCategory2Controller::class, 'store'])->name('be.branch_category_2.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\BranchCategory2Controller::class, 'edit'])->name('be.branch_category_2.edit');
+        Route::put('/update/{id}', [App\Http\Controllers\BranchCategory2Controller::class, 'update'])->name('be.branch_category_2.update');
+        Route::post('/clone/{id}', [App\Http\Controllers\BranchCategory2Controller::class, 'clone'])->name('be.branch_category_2.clone');
+        Route::delete('/destroy/{id}', [App\Http\Controllers\BranchCategory2Controller::class, 'destroy'])->name('be.branch_category_2.destroy');
+        Route::get('/featured', [App\Http\Controllers\BranchCategory2Controller::class, 'featured'])->name('be.branch_category_2.featured');
+        Route::get('/hideShow', [App\Http\Controllers\BranchCategory2Controller::class, 'hideshow'])->name('be.branch_category_2.hideshow');
+        Route::get('/changeNumber', [App\Http\Controllers\BranchCategory2Controller::class, 'changenumber'])->name('be.branch_category_2.number');
+        Route::get('/update-parent', [App\Http\Controllers\BranchCategory2Controller::class, 'update_parent'])->name('be.branch_category_2.update_parent');
     });
     Route::prefix('danh-muc-thu-vien-anh')->group(function () {
         Route::get('/', [App\Http\Controllers\GalleryTypeController::class, 'index'])->name('be.gallerytype.index');

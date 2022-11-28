@@ -21,15 +21,12 @@ class SocialController extends Controller
             'img.mimes'=> 'Định dạng cho phép là jpeg, png, jpg, gif, svg',
             'img.max' => 'Kích thước ảnh tối đa là 5MB',
             'file.max'=> 'Kích thước tệp tối đa là 10MB',
-            'file.mimes'=> 'Định dạng tệp cho phép là jpeg, png, jpg',
-            'slug.required' => 'Đường dẫn không được để trống',
-            'slug.unique' => 'Đường dẫn đã tồn tại',
+            'file.mimes'=> 'Định dạng tệp cho phép là jpeg, png, jpg'
         ];
         $validated = $request->validate([
             'name' => 'required|max:100',
             'img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file' => 'max:10240|mimes:zip,pdf,jpeg,png,jpg',
-            'slug' => "required|unique:socials,slug"
+            'file' => 'max:10240|mimes:zip,pdf,jpeg,png,jpg'
         ],$trans);
         $data = new Social();
         if($request->file('img')){
@@ -60,14 +57,11 @@ class SocialController extends Controller
             'img.max' => 'Kích thước ảnh tối đa là 5MB',
             'file.max'=> 'Kích thước tệp tối đa là 10MB',
             'file.mimes'=> 'Định dạng tệp cho phép là jpeg, png, jpg',
-            'slug.required' => 'Đường dẫn không được để trống',
-            'slug.unique' => 'Đường dẫn đã tồn tại',
         ];
         $validated = $request->validate([
             'name' => 'required|max:100',
             'img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'file' => 'max:10240|mimes:zip,pdf,jpeg,png,jpg',
-            'slug' => "required|unique:socials,slug,$id,id"
         ],$trans);
         $data = Social::find($id);
         if($request->file('img')){

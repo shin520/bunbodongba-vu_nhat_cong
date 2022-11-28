@@ -42,7 +42,7 @@
                            @include('be.component.description_edit')
                         </div>
                         <div class="col-md-12 mb-3">
-                           @include('be.component.content')
+                           @include('be.component.content_edit')
                         </div>
                     </div>
                 </div>

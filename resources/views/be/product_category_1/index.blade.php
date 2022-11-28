@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0 font-size-18">Danh mục cấp 1
-                        <a href="{{ route('be.product_category_1.add') }}" class="btn btn-primary new-custom"><i class="fa fa-plus"></i> Thêm</a>
+                        <a href="{{ route('be.branch_category_1.add') }}" class="btn btn-primary new-custom"><i class="fa fa-plus"></i> Thêm</a>
                     </h4>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table  class="table text-center" id="product_category_1">
+                <table  class="table text-center" id="branch_category_1">
                     <thead>
                         <tr>
                             <th width="5%" scope="col">STT</th>
@@ -49,8 +49,8 @@
                                     @include('be.component.show_hideshow_checkbox')
                                 </td>
                                 <td>
-                                    @include('be.component.show_edit_btn',['model'=>'product_category_1'])
-                                    @include('be.component.show_delete_btn',['model'=>'product_category_1'])
+                                    @include('be.component.show_edit_btn',['model'=>'branch_category_1'])
+                                    @include('be.component.show_delete_btn',['model'=>'branch_category_1'])
                                 </td>
                             </tr>
                         @endforeach
@@ -63,7 +63,7 @@
     </div>
 @endsection
 @push('script')
-    @include('be.component.js_model_featured',['model'=>'product_category_1'])
-    @include('be.component.js_model',['model'=>'product_category_1'])
-    @include('be.component.js_datatable',['model'=>'product_category_1'])
+    @include('be.component.js_model_featured',['model'=>'branch_category_1'])
+    @include('be.component.js_model',['model'=>'branch_category_1'])
+    @include('be.component.js_datatable',['model'=>'branch_category_1'])
 @endpush

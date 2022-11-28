@@ -14,7 +14,7 @@
                 </ol>
             </nav>
             <div class="main-title text-center mb-2">
-                <h1 class="title font-weight-bold">{{ __('giới thiệu') }}</h1>
+                <h1 class="title font-weight-bold">{{ __('GIỚI THIỆU') }}</h1>
             </div>
         </div>
     </div>
@@ -23,7 +23,6 @@
         <article class="card post mb-5">
             <div style="overflow: hidden" class="post-content" id="post_content">
                 {!! $data->content !!}
-
             </div>
         </article>
       </div>
