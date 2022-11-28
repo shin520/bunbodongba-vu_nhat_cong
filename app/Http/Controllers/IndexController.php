@@ -223,6 +223,8 @@ class IndexController extends Controller
     }
  
 
+
+
     public function page($slug){
         $data = Page::where('slug',$slug)->FirstOrFail();
         $master =
@@ -247,7 +249,16 @@ class IndexController extends Controller
             break;
             case('all-branch');
             $is_active = $data->slug;
-            $items = Branch::where('hideshow', true)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
+            if(request()->search){
+                // $items = Branch::where('parent_id', request()->search)->where('hideshow', true)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
+                $branch = Branch::where('name' 'LIKE' '%' request('search') '%')
+                $items = Branch::where->whereHas('wallet',function($z){
+                    $z->where('level_id',request('level'));
+                });->where('hideshow', true)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
+            }
+            else{
+                $items = Branch::where('hideshow', true)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
+            }
             return view('index.page.branch', compact('data', 'items', 'master', 'is_active'));
             case('all-post');
             $is_active = $data->slug;

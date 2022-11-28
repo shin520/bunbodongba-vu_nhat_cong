@@ -10,13 +10,15 @@
         </div>
         <div class="float_search__name">Gần bạn nhất</div>
         <span>Chọn khu vực bạn muốn tìm cửa hàng</span>
+        <form action="{{ route('page', $share['all_branch_menu']->slug)}}" method="GET">
         <div class="float_search__form">
-            <select class="input" name="" id="">
-                <option value="">Chọn khu vực</option>
-                <option value="">Khu vực cấp 1 - A</option>
-                <option value="">Khu vực cấp 1 - B</option>
-            </select>
-            <button class="input">Tìm nhanh</button>
-        </div>
+                <select class="input" name="search" id="">
+                    @foreach ($share['branch_category_1'] as $item)
+                        <option value="{{$item->slug}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
+                <button class="input" type="submit">Tìm nhanh</button>
+            </div>
+        </form>
     </div>
 </div>
