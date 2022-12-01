@@ -271,6 +271,87 @@
             })
         });
     </script>
+
+    {{-- ajax cate branch --}}
+    <script>
+        $('#select_parent').on('change', function() {
+            var id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: '{{ route('be.branch.get_parent_child') }}',
+                data: {
+                    id: id
+                },
+                success: function(result) {
+                    $('#show_children').html(result);
+                }
+            })
+        });
+    </script>
+    <script>
+        $('.select_parent').on('change', function() {
+            var id_flink = $(this).attr('data-id');
+            var id_parent = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: '{{ route('be.branch.update_parent') }}',
+                data: {
+                    id_parent: id_parent,
+                    id_flink: id_flink
+                },
+                success: function(result) {
+                    $('#show_children' + id_flink).css('border', '2px solid red').html(result);
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Cập nhật thành công !'
+                        })
+                }
+            })
+        });
+    </script>
+    <script>
+        $('.select_parent_of_child_parent').on('change', function() {
+                var id_flink_child_parent = $(this).attr('data-id');
+                var id_parent = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: '{{ route('be.branch_category_2.update_parent') }}',
+                    data: {
+                        id_parent: id_parent,
+                        id_flink_child_parent: id_flink_child_parent
+                    },
+                    success: function(data) {
+                         Toast.fire({
+                        icon: 'success',
+                        title: 'Cập nhật thành công !'
+                        })
+                    }
+                })
+            });
+    </script>
+    <script>
+        $('.select_parent_child').on('change', function() {
+            var id_flink = $(this).attr('data-id');
+            var id_parent_child = $(this).val();
+
+            $.ajax({
+                type: "GET",
+                url: '{{ route('be.branch.update_parent_child') }}',
+                data: {
+                    id_parent_child: id_parent_child,
+                    id_flink: id_flink,
+                },
+                success: function(data) {
+                         Toast.fire({
+                        icon: 'success',
+                        title: 'Cập nhật thành công !'
+                        })
+                    }
+            })
+        });
+    </script>
+    {{-- end ajax cate branch --}}
+
     <script>
         $('.caching_web').click(function(e){
             e.preventDefault();

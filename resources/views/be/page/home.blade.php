@@ -130,8 +130,8 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-muted fw-medium">Tổng Danh mục</p>
-                                <h4 class="mb-0">{{ App\Models\ProductCategory1::count() }}</h4>
+                                <p class="text-muted fw-medium">Thư Liên Hệ</p>
+                                <h4 class="mb-0">{{ App\Models\Contact::count() }}</h4>
                             </div>
 
                             <div class="flex-shrink-0 align-self-center">
@@ -150,8 +150,8 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-muted fw-medium">Danh mục con</p>
-                                <h4 class="mb-0">{{ App\Models\ProductCategory2::count() }}</h4>
+                                <p class="text-muted fw-medium">Tin Tức</p>
+                                <h4 class="mb-0">{{ App\Models\Post::count() }}</h4>
                             </div>
 
                             <div class="flex-shrink-0 align-self-center ">
@@ -170,7 +170,7 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-muted fw-medium">Tổng sản phẩm</p>
+                                <p class="text-muted fw-medium">Sản Phẩm</p>
                                 <h4 class="mb-0">{{ App\Models\Product::count() }}</h4>
                             </div>
 

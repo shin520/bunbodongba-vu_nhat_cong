@@ -36,10 +36,10 @@
                         <th width="5%" scope="col">STT</th>
                         <th width="25%" scope="col">Tên</th>
                         <th width="15%" scope="col">DM c1</th>
-                        <th width="15%" scope="col">DM c2</th>
+                        {{-- <th width="15%" scope="col">DM c2</th> --}}
                         <th width="10%" scope="col">Xem</th>
                         <th width="10%" scope="col">Ẩn hiện</th>
-                        <th width="10%" scope="col">Nổi bật</th>
+                        {{-- <th width="10%" scope="col">Nổi bật</th> --}}
                         <th width="10%" scope="col">Hành động</th>
                     </tr>
                 </thead>
@@ -67,7 +67,7 @@
                                 @endif
                             </select>
                         </td>
-                        <td data-label="Danh mục C2">
+                        {{-- <td data-label="Danh mục C2">
                             <select data-id="{{ $item->id }}" name="parent_child_id"
                                 class="form-control select_parent_child select2" id="show_children{{ $item->id }}">
                                 @if($item->parent_child != NULL)
@@ -86,16 +86,16 @@
                                 @endif
                                 @endif
                             </select>
-                        </td>
+                        </td> --}}
                         <td data-label="Xem">
-                            @include('be.component.show_link')
+                            @include('be.component.show_link', ['model'=>'product'])
                         </td>
                         <td data-label="Hiển thị">
                             @include('be.component.show_hideshow_checkbox')
                         </td>
-                        <td data-label="Nổi bật">
+                        {{-- <td data-label="Nổi bật">
                             @include('be.component.show_featured_checkbox')
-                        </td>
+                        </td> --}}
                         <td data-label="Thao tác">
                             @include('be.component.show_edit_btn',['model'=>'product'])
                             @include('be.component.show_delete_btn',['model'=>'product'])

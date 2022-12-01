@@ -29,7 +29,7 @@
                             <th width="20%" scope="col">Tên</th>
                             <th width="5%" scope="col">Xem</th>
                             <th width="20%" scope="col">Nổi bật</th>
-                            <th width="20%" scope="col">Ẩn hiện</th>
+                            {{-- <th width="20%" scope="col">Ẩn hiện</th> --}}
                             <th width="20%" scope="col">Hành động</th>
                         </tr>
                     </thead>
@@ -45,9 +45,9 @@
                                 <th>
                                     @include('be.component.show_link',['model'=>'recruitment'])
                                 </th>
-                                <td>
+                                {{-- <td>
                                     @include('be.component.show_featured_checkbox')
-                                </td>
+                                </td> --}}
                                 <td>
                                     @include('be.component.show_hideshow_checkbox')
                                 </td>

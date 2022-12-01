@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+class ContactOrderController extends Controller
 {
     public function index(){
-        $data = Contact::where('type', 'contact')->orderby('number','asc')->orderby('id','desc')->get();
-        return view('be.contact.index',compact('data'));
+        $data = Contact::where('type', 'order')->orderby('number','asc')->orderby('id','desc')->get();
+        return view('be.order.index',compact('data'));
     }
 
     public function read(Request $request){
@@ -20,14 +20,14 @@ class ContactController extends Controller
 
     public function edit($id){
         $data = Contact::find($id);
-        return view('be.contact.edit',compact('data'));
+        return view('be.order.edit',compact('data'));
     }
     public function update($id,Request $request){
         $data = Contact::find($id);
         $data->read = $request->read;
         $data->save();
         alert()->success('Thành công','Đã cập nhật dữ liệu');
-        return redirect()->route('be.contact.index');
+        return redirect()->route('be.order.index');
     }
 
     public function number(Request $request){
@@ -41,7 +41,7 @@ class ContactController extends Controller
         $data = Contact::find($id);
         $data->delete();
         alert()->success('Thành công','Đã xóa dữ liệu');
-        return redirect()->back();
+        return redirect()->route('be.order.index');
     }
 
 }

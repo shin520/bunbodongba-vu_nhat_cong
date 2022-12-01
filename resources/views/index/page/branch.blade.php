@@ -11,14 +11,14 @@
                     </ol>
                 </nav>
                 <div class="main-title text-center mb-5">
-                    <h1 class="title font-weight-bold">{{ __('Chi nhánh') }}</h1>
+                    <h2 class="title font-weight-bold">{{ __('CHI NHÁNH') }}</h2>
                 </div>
-                <div class="row justify-content-center">
+                <div class="row">
                     @foreach ($items as $item)
-                        <div class="col-lg-8 col-md-12 mb-4">
+                        <div class="col-lg-6 col-md-12 mb-4">
                             <a class="branch_item" href="{{ route('branch', $item->slug) }}" style="display: block">
-                                <div class="name">{{ $item->name }}</div>
-                                <div class="address"><b>Địa chỉ: </b>{{ $item->address }}</div>
+                                <h3 class="notranslate name">{{ $item->name }}</h3>
+                                <div class="address"><b>Địa chỉ: </b> {{ $item->address }}</div>
                             </a>
                         </div>
                     @endforeach

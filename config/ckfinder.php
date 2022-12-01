@@ -31,8 +31,8 @@ $config['authentication'] = '\App\Http\Middleware\CustomCKFinderAuth';
 /* License Key ==*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
-$config['licenseName'] = 'momolaravel.local';
-$config['licenseKey']  = '9SYS45X4W4WVGXM63PGEL5DNSN8P2';
+$config['licenseName'] = 'bunbodongba.com';
+$config['licenseKey']  = 'SW2WFYPMR2XFQSW89WTPKVQ72XEJH';
 
 /* CKFinder Internal Directory */
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_privateDir

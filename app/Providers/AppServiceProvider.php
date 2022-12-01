@@ -9,7 +9,7 @@ use App\Models\BranchCategory1;
 use App\Models\Policy;
 use App\Models\Product;
 use App\Models\Page;
-use App\Models\Feedback;
+use App\Models\FeedBack;
 use App\Models\Branch;
 use App\Models\Social;
 use App\Models\StaticContent;
@@ -63,6 +63,7 @@ class AppServiceProvider extends ServiceProvider
         $share['all_post_menu'] = Page::where('type', 'all-post')->first();
         $share['all_branch_menu'] = Page::where('type', 'all-branch')->first();
         $share['all_feedback'] = Page::where('type', 'all-feedback')->first();
+        $share['static_page'] = Page::where('hideshow', true)->get();
         View::share('share',$share);
         $policy_list['policy_list'] = Policy::where('featured', '1')->orderBy('number', 'ASC')->orderBy('id', "desc")->limit(4)->get();
         View::share('policy_list',$policy_list);

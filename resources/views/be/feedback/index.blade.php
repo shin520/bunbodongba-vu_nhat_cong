@@ -24,6 +24,7 @@
                         <tr>
                             <th width="10%" scope="col">STT</th>
                             <th width="20%" scope="col">Tên</th>
+                            <th width="20%" scope="col">Nổi bật</th>
                             <th width="20%" scope="col">Ẩn hiện</th>
                             <th width="20%" scope="col">Hành động</th>
                         </tr>
@@ -36,6 +37,9 @@
                                 </th>
                                 <td>
                                     @include('be.component.show_name')
+                                </td>
+                                <td>
+                                    @include('be.component.show_featured_checkbox')
                                 </td>
                                 <td>
                                     @include('be.component.show_hideshow_checkbox')
@@ -55,6 +59,7 @@
        </div>
 @endsection
 @push('script')
+    @include('be.component.js_model_featured',['model'=>'feedback'])
     @include('be.component.js_model',['model'=>'feedback'])
     @include('be.component.js_datatable',['model'=>'feedback'])
 @endpush

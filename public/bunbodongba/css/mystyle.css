@@ -137,7 +137,7 @@ input::placeholder{
 .search__content{
     background: white;
     width: 400px;
-    height: 400px;
+    height: auto;
     margin: auto;
     padding: 10px;
     position: relative;
@@ -345,7 +345,33 @@ li.menu_top__menu--item.has-children .sub_menu{
     margin-bottom: 30px;
 }
 .area_test__memu_item--img{
+    width: 350px;
+    height: 210px;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px rgb(197, 197, 197);
+}
+.area_test__memu_item--img img{
+    width: 350px;
+    height: 210px;
+    object-fit: cover;
+}
+.product_card_image{
+    width: 255px;
+    height: 175px;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px rgb(190, 190, 190);
+}
+.product_card_image img{
+    width: 255px;
+    height: 175px;
+    object-fit: cover;
+}
+.maps_contact iframe{
     width: 100%;
+}
+.slick-slide .img{
+    padding: 0px 5px;
 }
 .area_test__memu_item--name{
     padding: 10px 0;
@@ -405,6 +431,10 @@ li.menu_top__menu--item.has-children .sub_menu{
     top: 0;
     left: 0;
 }
+.feed_back span a{
+    font-weight: bold;
+    text-decoration: none;
+}
 
 .feed_back__img--outline_a{
     position: absolute;
@@ -440,6 +470,7 @@ li.menu_top__menu--item.has-children .sub_menu{
     text-align: center;
     line-height: 1.6;
     text-transform: uppercase;
+    cursor: pointer;
 }
 .feed_back__title{
     text-align: center;
@@ -672,9 +703,13 @@ footer .branch_btn--open{
 }
 .bottom_information--author{
     color: black;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     line-height: 1.6;
+}
+.bottom_information--author a{
+    font-weight: bold;
+    text-decoration: none;
 }
 .bottom_information--button{
     padding: 10px 50px;
@@ -683,13 +718,18 @@ footer .branch_btn--open{
     border-radius: 25px;
     font-weight: bold;
 }
-
+.sns__item.branch_btn--open, a, button{
+    cursor: pointer;
+}
 
 nav .breadcrumb{
     background: white;
     font-size: 12px;
     font-weight: bold;
     box-shadow: unset!important;
+}
+.breadcrumb{
+    text-transform: capitalize;
 }
 
 .main-title .title{
@@ -777,6 +817,7 @@ a.to_topz:hover {
     display: flex;
     grid-gap: 10px;
     flex-direction: column;
+    z-index: 999;
 }
 .sns__area img{
     width: 48px;
@@ -864,6 +905,35 @@ a.to_topz:hover {
 .user_feedback__video{
     margin-top: 20px;
 }
+.show_video_feedback iframe{
+    max-width: 100%!important;
+}
+
+.warning_empty_data{
+    padding: 30px 50px;
+    background-color: pink;
+    border: solid red 2px;
+    border-radius: 3px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    max-width: 768px;
+    margin: 30px auto;
+}
+.menu_end_land{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+}
+.skiptranslate{
+    display: none;
+}
+
+body{
+    top: 0!important;
+}
 @media screen and (max-width: 768px) {
     .shin_md_rp__open.show, .shin_md_rp__close.show, .shin_sm_rp__open.show, .shin_sm_rp__close.show{
         display: none;
@@ -897,5 +967,30 @@ a.to_topz:hover {
     }
     .fanpage_site{
         display: none;
+    }
+}
+@media screen and (max-width: 576px) {
+    .area_test__memu_item--img{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+    .area_test__memu_item--img img{
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+    .feed_back__img {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+    .trademark img{
+        max-width: 100%;
+        height: auto;
+        object-fit: scale-down;
     }
 }

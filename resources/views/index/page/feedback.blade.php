@@ -11,11 +11,11 @@
                     </ol>
                 </nav>
                 <div class="main-title text-center mb-5">
-                    <h1 class="title font-weight-bold">{{ __('Phản hồi') }}</h1>
+                    <h2 class="title font-weight-bold">{{ __('PHẢN HỒI CỦA KHÁCH HÀNG') }}</h2>
                 </div>
                 <div class="row justify-content-center">
                     @foreach ($items as $item)
-                        <div class="col-md-8 mb-4 col-6">
+                        <div class="col-lg-6 col-md-12 mb-4">
                             <figure class="user_feedback__list">
                                 <div class="user_feedback__image">
                                     <img style="width: 56px; height: 56px" src="/storage/uploads/{{ $item->img }}" class="img-fluid"

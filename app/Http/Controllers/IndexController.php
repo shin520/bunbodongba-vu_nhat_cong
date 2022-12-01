@@ -74,6 +74,11 @@ class IndexController extends Controller
         return view('index.home.index', compact('data', 'master'));
     }
 
+    public function changelocale($locale){
+        session()->put('locale', $locale);
+        return redirect()->back();
+    }
+
     public function get_location(Request $request){
         $data = Branch::find($request->id);
         return $data;
@@ -109,7 +114,7 @@ class IndexController extends Controller
         return view('index.page.product-detail', compact("data", "datarelated", "master"));
     }
     public function feedback($slug){
-        $data = Feedback::where('slug', $slug)->FirstOrFail();
+        $data = FeedBack::where('slug', $slug)->FirstOrFail();
         $master =
         [
             'name' => $data->name,
@@ -168,7 +173,7 @@ class IndexController extends Controller
     }
 
 
-    public function store_contact_form(Request $request)
+    public function store_order_contact_form(Request $request)
     {
             $secret_key = Setting::first()->captcha_secret;
             $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -177,7 +182,7 @@ class IndexController extends Controller
                     'secret' => $secret_key,
                     'response' => $request->recaptcha,
                     'remoteip' => $remoteip
-                  ];
+                ];
             $options = [
                     'http' => [
                       'header' => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -188,40 +193,92 @@ class IndexController extends Controller
                     $context = stream_context_create($options);
                     $result = file_get_contents($url, false, $context);
                     $resultJson = json_decode($result);
+                    
+                
             if ($resultJson->success != true) {
                     alert()->error('Lỗi','Captcha đã hết hạn');
                     return back()->withErrors(['captcha' => 'Captcha đã hết hạn']);
                     }
+                    
             if ($resultJson->score >= 0.3) {
-                $lang = [
-                    'name.required' => "Tên không được bỏ trống !",
-                    'phone.required' => "Số điện thoại không được bỏ trống !",
-                    'date.required' => "Thời gian không được bỏ trống !",
-                    // 'people.required' => "Số lượng người không được bỏ trống !",
-                ];
-                $request->validate([
-                    'name' => 'required',
-                    'phone' => 'required|unique:contacts',
-                    'date' => 'required|date:contacts',
-                    // 'people' => 'required|people:contacts',
 
-                ], $lang);
-                        $data_info = [
-                            'number' => $request->true ?? true,
-                            'name' => $request->name,
-                            'phone' => $request->phone,
-                            'date' => $request->date,
-                            'people' => $request->people,
-                            'read' => $request->read,
-                        ];
-                        $contact = Contact::create($data_info);
-                    alert()->success('Đã gửi thư','Chúng tôi sẽ phản hồi lại cho bạn ngay');
-                    return back();
+                $data_info = [
+                    'number' => $request->true ?? true,
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'date' => $request->date,
+                    'people' => $request->people,
+                    'read' => $request->read,
+                    'type' => 'order',
+                ];
+
+                $contact = Contact::create($data_info);
+
+                alert()->success('Đã gửi thư','Chúng tôi sẽ phản hồi lại cho bạn ngay');
+                return back();
             } else {
                     alert()->success('Lỗi','Đã có lỗi xảy ra !');
                     return back()->withErrors(['captcha' => 'Captcha đã hết hạn']);
             }
     }
+
+    
+    public function store_contact_form(Request $request) {
+        $secret_key = Setting::first() -> captcha_secret;
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+        $data = [
+            'secret' => $secret_key,
+            'response' => $request -> recaptcha,
+            'remoteip' => $remoteip
+        ];
+        $options = [
+            'http' => [
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query($data)
+            ]
+        ];
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        $resultJson = json_decode($result);
+
+
+        if ($resultJson -> success != true) {
+            alert() -> error('Lỗi', 'Captcha đã hết hạn');
+            return back() -> withErrors(['captcha' => 'Captcha đã hết hạn']);
+        }
+        if ($resultJson -> score>= 0.3) {
+            // $lang = [
+            //     'name.required' => "Tên không được bỏ trống !",
+            //     'phone.required' => "Số điện thoại không được bỏ trống !",
+            // ];
+
+            // $request -> validate([
+            //     'name' => 'required',
+            //     'phone' => 'required|unique:contacts',
+
+            // ], $lang);
+
+            $data_info = [
+                'number' => $request -> true ?? true,
+                'name' => $request -> name,
+                'email' => $request -> email,
+                'phone' => $request -> phone,
+                'content' => $request -> content,
+                'read' => $request -> read,
+                'type' => 'contact',
+            ];
+            $contact = Contact::create($data_info);
+
+            alert() -> success('Đã gửi thư', 'Chúng tôi sẽ phản hồi lại cho bạn ngay');
+            return back();
+        } else {
+            alert() -> success('Lỗi', 'Đã có lỗi xảy ra !');
+            return back() -> withErrors(['captcha' => 'Captcha đã hết hạn']);
+        }
+    }
+
 
 
     public function page($slug){
@@ -262,7 +319,7 @@ class IndexController extends Controller
             return view('index.page.post', compact('data', 'items', 'master', 'is_active'));
             case('all-feedback');
             $is_active = $data->slug;
-            $items = Feedback::where('hideshow', true)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
+            $items = FeedBack::where('hideshow', true)->orderBy('number', 'ASC')->orderBy('id', 'DESC')->paginate(6);
             return view('index.page.feedback', compact('data', 'items', 'master', 'is_active'));
             case('all-recruitment');
             $is_active = $data->slug;

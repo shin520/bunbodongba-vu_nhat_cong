@@ -121,7 +121,7 @@
                     <div class="product-box">
                         <a href="{{route('product', $item->slug)}}"
                             title="{{ $item->name }}">
-                            <div class="hover15">
+                            <div class="product_card_image hover15">
                                 <figure class="position-relative">
                                     <img class="card-img-top border__shadow__img" src="/storage/uploads/{{ $item->img }}" alt="{{ $item->name }}">
                                     @if ($item->discount > 0)

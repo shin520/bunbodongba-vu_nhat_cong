@@ -9,7 +9,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Tổng Quan</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('be.branch_category_1.index') }}">Danh mục</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('be.product_category_1.index') }}">Danh mục</a></li>
                         <li class="breadcrumb-item active"  aria-current="page">Sửa</li>
                     </ol>
                 </div>
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <form action="{{ route('be.branch_category_1.update',$data->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('be.product_category_1.update',$data->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -28,7 +28,7 @@
                        @include('be.component.name_edit')
                     </div>
                     <div class="col-md-12 mb-3">
-                        @include('be.component.multi_upload_image_add')
+                        @include('be.component.image_add')
                     </div>
                     <div class="col-md-12 mb-3">
                        @include('be.component.hideshow_edit')
@@ -46,7 +46,7 @@
                 </div>
             </div>
             @include('be.component.seo-edit')
-            @include('be.component.button_submit',['model'=>'branch_category_1'])
+            @include('be.component.button_submit',['model'=>'product_category_1'])
         </div>
     </form>
 </div>

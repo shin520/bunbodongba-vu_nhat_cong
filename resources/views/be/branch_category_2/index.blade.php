@@ -34,9 +34,8 @@
                     <thead>
                         <tr>
                             <th width="5%" scope="col">STT</th>
-                            <th width="25%" scope="col">Danh mục</th>
-                            <th width="35%" scope="col">Tên</th>
-                            <th width="5%" scope="col">Xem</th>
+                            <th width="25%" scope="col">DMC1</th>
+                            <th width="35%" scope="col">Tên danh mục</th>
                             <th width="10%" scope="col">Nổi bật</th>
                             <th width="10%" scope="col">Ẩn hiện</th>
                             <th width="20%" scope="col">Hành động</th>
@@ -49,7 +48,7 @@
                                    @include('be.component.show_number')
                                 </th>
                                 <td>
-                                    {{-- <select data-id = {{ $item->id }} name="parent_id" class="form-control select_parent_of_child_parent select2">
+                                    <select data-id = {{ $item->id }} name="parent_id" class="form-control select_parent_of_child_parent select2">
                                         @if( $item->parent != NULL)
                                         @foreach ($parent as $p)
                                         <option {{ $p->id == $item->parent_id ? 'selected' : '' }} value="{{ $p->id }}">{{ $p->name }}</option>
@@ -60,14 +59,10 @@
                                         <option value="{{ $p->id }}">{{ $p->name }}</option>
                                         @endforeach
                                         @endif
-                                    </select> --}}
-                                    {{ $item->parent->name ?? '' }}
+                                    </select>
                                 </td>
                                 <td>
                                     @include('be.component.show_name')
-                                </td>
-                                <td>
-                                   @include('be.component.show_link')
                                 </td>
                                 <td>
                                    @include('be.component.show_featured_checkbox')

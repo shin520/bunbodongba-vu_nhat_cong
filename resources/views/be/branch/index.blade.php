@@ -34,9 +34,9 @@
                 <thead>
                     <tr width="100%">
                         <th width="5%" scope="col">STT</th>
-                        <th width="25%" scope="col">Tên</th>
-                        <th width="15%" scope="col">DM c1</th>
-                        <th width="15%" scope="col">DM c2</th>
+                        <th width="25%" scope="col">Tên chi nhánh</th>
+                        <th width="15%" scope="col">Danh mục cấp 1</th>
+                        <th width="15%" scope="col">Danh mục cấp 2</th>
                         <th width="10%" scope="col">Xem</th>
                         <th width="10%" scope="col">Ẩn hiện</th>
                         <th width="10%" scope="col">Nổi bật</th>

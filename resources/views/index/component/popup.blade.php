@@ -15,7 +15,7 @@
             <select class="input" name="search" id="">
                 <option value="">Chọn khu vực</option>
                 @foreach ($share['branch_category_1'] as $item)
-                <option value="{{ $item->slug }}">{{ $item->name }}</option>
+                <option class="notranslate" value="{{ $item->slug }}">{{ $item->name }}</option>
                 @endforeach
             </select>
             <button class="input">Tìm nhanh</button>

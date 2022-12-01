@@ -10,6 +10,7 @@
                 <li class="menu-title">QUẢN LÍ</li>
                 {{-- @include('be.layouts.menu.billing')<!--Hóa đơn--> --}}
                 @include('be.layouts.menu.contact')<!--Thư liên hệ-->
+                @include('be.layouts.menu.order')<!--Đặt bàn-->
                 @include('be.layouts.menu.recruitment')<!--Khóa học-->
                 {{-- @include('be.layouts.menu.history_download')<!--Lịch sử tải xuống--> --}}
                 @include('be.layouts.menu.post_group')<!--Nhóm bài viết-->
@@ -17,7 +18,7 @@
                 @include('be.layouts.menu.static_page')<!--Trang tĩnh-->
                 @include('be.layouts.menu.static_content')<!--Nội dung tĩnh-->
                 @include('be.layouts.menu.branch_group')<!--Coaching-->
-                @include('be.layouts.menu.about')<!--Chính sách-->
+                {{-- @include('be.layouts.menu.about')<!--Chính sách--> --}}
                 @include('be.layouts.menu.policy')<!--Chính sách-->
                 @include('be.layouts.menu.feedback')<!--Chính sách-->
                 @include('be.layouts.menu.slide')<!--Slide hình ảnh-->

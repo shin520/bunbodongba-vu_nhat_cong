@@ -25,8 +25,10 @@ Route::get('/chinh-sach/{slug}.html', [IndexController::class, 'policy'])->name(
 Route::get('/gioi-thieu/{slug}.html', [IndexController::class, 'about'])->name('about');
 Route::get('/tuyen-dung/{slug}.html', [IndexController::class, 'recruitment'])->name('recruitment');
 Route::get('/phan-hoi/{slug}.html', [IndexController::class, 'feedback'])->name('feedback');
-Route::POST('/contact-add', [IndexController::class, 'store_contact_form'])->name('store.contact');
-Route::POST('/contact', [App\Http\Controllers\HomeController::class, 'ajax_update_info_web'])->name('ajax_update_info_web');
+Route::post('/contact-add', [IndexController::class, 'store_contact_form'])->name('store.contact');
+Route::post('/order-contact-add', [IndexController::class, 'store_order_contact_form'])->name('store.order.contact');
+Route::post('/contact', [App\Http\Controllers\HomeController::class, 'ajax_update_info_web'])->name('ajax_update_info_web');
+Route::get('change/{locale}',[IndexController::class, 'changelocale'])->name('change.locale');
 
 Auth::routes([
     'register' => true,
@@ -45,13 +47,20 @@ Auth::routes([
 
 Route::prefix('admin')->middleware(['auth','active_account'])->group(function () {
 
+    Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
 
-    Route::get('/contactx', [App\Http\Controllers\ContactController::class, 'index'])->name('be.contact.index')->middleware('permission:xem-mail-lien-he');
+    Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');
+
+    Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('be.contact.index')->middleware('permission:xem-mail-lien-he');
     Route::get('/edit/{id}', [App\Http\Controllers\ContactController::class, 'edit'])->name('be.contact.edit')->middleware('permission:xem-mail-lien-he');
     Route::put('/update/{id}', [App\Http\Controllers\ContactController::class, 'update'])->name('be.contact.update')->middleware('permission:xem-mail-lien-he');
     Route::delete('/destroy/{id}', [App\Http\Controllers\ContactController::class, 'destroy'])->name('be.contact.destroy')->middleware('permission:xem-mail-lien-he');
     Route::get('/read', [App\Http\Controllers\ContactController::class, 'read'])->name('be.contact.read')->middleware('permission:xem-mail-lien-he');
     Route::get('/number', [App\Http\Controllers\ContactController::class, 'number'])->name('be.contact.number')->middleware('permission:xem-mail-lien-he');
+    
+    Route::get('/order', [App\Http\Controllers\ContactOrderController::class, 'index'])->name('be.order.index')->middleware('permission:xem-mail-lien-he');
 
 
     Route::get('/tool', [App\Http\Controllers\HomeController::class, 'tool'])->name('tool');
@@ -240,14 +249,14 @@ Route::prefix('admin')->middleware(['auth','active_account'])->group(function ()
         Route::get('/update-parent', [App\Http\Controllers\ProductController::class, 'update_parent'])->name('be.product.update_parent');
         Route::get('/update-parent-child', [App\Http\Controllers\ProductController::class, 'update_parent_child'])->name('be.product.update_parent_child');
 
-        Route::delete('/delete-all-image-detail', [App\Http\Controllers\ProductController::class, 'delete_all_image_detail'])->name('be.product.delete_all_image_detail');
-        Route::delete('/delete-single-image-detail', [App\Http\Controllers\ProductController::class, 'delete_single_image_detail'])->name('be.product.delete_single_image_detail');
-        Route::delete('/delete-multiple-image-detail', [App\Http\Controllers\ProductController::class, 'delete_multiple_image_detail'])->name('be.product.delete_multiple_image_detail');
+        Route::delete('/delete-product-all-image-detail', [App\Http\Controllers\ProductController::class, 'delete_all_image_detail'])->name('be.product.delete_all_image_detail');
+        Route::delete('/delete-product-single-image-detail', [App\Http\Controllers\ProductController::class, 'delete_single_image_detail'])->name('be.product.delete_single_image_detail');
+        Route::delete('/delete-product-multiple-image-detail', [App\Http\Controllers\ProductController::class, 'delete_multiple_image_detail'])->name('be.product.delete_multiple_image_detail');
         Route::post('/upload-product-image-via-ajax', [App\Http\Controllers\ProductController::class, 'uploadImageViaAjax'])->name('be.product.uploadImageViaAjax');
         Route::post('/upload-branch-image-via-ajax', [App\Http\Controllers\BranchController::class, 'uploadImageViaAjax'])->name('be.branch.uploadImageViaAjax');
-        Route::delete('/delete-single-image-detail', [App\Http\Controllers\BranchController::class, 'delete_single_image_detail'])->name('be.branch.delete_single_image_detail');
-        Route::delete('/delete-multiple-image-detail', [App\Http\Controllers\BranchController::class, 'delete_multiple_image_detail'])->name('be.branch.delete_multiple_image_detail');
-        Route::delete('/delete-all-image-detail', [App\Http\Controllers\BranchController::class, 'delete_all_image_detail'])->name('be.branch.delete_all_image_detail');
+        Route::delete('/delete-branch-single-image-detail', [App\Http\Controllers\BranchController::class, 'delete_single_image_detail'])->name('be.branch.delete_single_image_detail');
+        Route::delete('/delete-branch-multiple-image-detail', [App\Http\Controllers\BranchController::class, 'delete_multiple_image_detail'])->name('be.branch.delete_multiple_image_detail');
+        Route::delete('/delete-branch-all-image-detail', [App\Http\Controllers\BranchController::class, 'delete_all_image_detail'])->name('be.branch.delete_all_image_detail');
 
         Route::post('/store-image', [App\Http\Controllers\ProductController::class, 'store_image'])->name('be.product.store_image');
 
@@ -295,6 +304,9 @@ Route::prefix('admin')->middleware(['auth','active_account'])->group(function ()
         Route::get('/featured', [App\Http\Controllers\BranchController::class, 'featured'])->name('be.branch.featured');
         Route::get('/hideShow', [App\Http\Controllers\BranchController::class, 'hideshow'])->name('be.branch.hideshow');
         Route::get('/changeNumber', [App\Http\Controllers\BranchController::class, 'changenumber'])->name('be.branch.number');
+        Route::get('/get-flink-parent-child', [App\Http\Controllers\BranchController::class, 'get_parent_child'])->name('be.branch.get_parent_child');
+        Route::get('/update-parent', [App\Http\Controllers\BranchController::class, 'update_parent'])->name('be.branch.update_parent');
+        Route::get('/update-parent-child', [App\Http\Controllers\BranchController::class, 'update_parent_child'])->name('be.branch.update_parent_child');
     });
 
     Route::prefix('danh-muc-chi-nhanh-cap-1')->group(function () {
@@ -339,6 +351,7 @@ Route::prefix('admin')->middleware(['auth','active_account'])->group(function ()
         Route::get('/edit/{id}', [App\Http\Controllers\GalleryController::class, 'edit'])->name('be.gallery.edit');
         Route::put('/update/{id}', [App\Http\Controllers\GalleryController::class, 'update'])->name('be.gallery.update');
         Route::delete('/destroy/{id}', [App\Http\Controllers\GalleryController::class, 'destroy'])->name('be.gallery.destroy');
+        Route::get('/featured', [App\Http\Controllers\GalleryController::class, 'featured'])->name('be.gallery.featured');
         Route::get('/hideShow', [App\Http\Controllers\GalleryController::class, 'hideshow'])->name('be.gallery.hideshow');
         Route::get('/changeNumber', [App\Http\Controllers\GalleryController::class, 'changenumber'])->name('be.gallery.number');
 

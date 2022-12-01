@@ -19,7 +19,7 @@
                             <div class="thumbnail-news mb-2">
                                 <a href="{{route('product', $item->slug)}}"
                                     title="{{ $item->title }}">
-                                    <div class="img-demo position-relative">
+                                    <div class="img-demo position-relative product_card_image">
                                         <img src="/storage/uploads/{{$item->img}}" class="img-fluid border__shadow__img" alt="{{ $item->title }}"
                                         title="{{ $item->title }}">
                                         @if($item->discount > 0)

@@ -22,6 +22,6 @@ class ProductCategory1 extends Model
 
     public function product_index()
     {
-        return $this->hasMany(Product::class,'parent_id')->orderBy('id', 'asc')->where('hideshow', true)->take(6);
+        return $this->hasMany(Product::class,'parent_id')->orderBy('id', 'asc')->where('hideshow', true);
     }
 }

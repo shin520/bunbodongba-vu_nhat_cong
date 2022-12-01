@@ -60,6 +60,7 @@
        </div>
 @endsection
 @push('script')
+    @include('be.component.js_model_featured',['model'=>'gallery'])
     @include('be.component.js_model',['model'=>'gallery'])
     @include('be.component.js_datatable',['model'=>'gallery'])
 @endpush

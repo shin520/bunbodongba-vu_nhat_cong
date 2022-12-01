@@ -45,6 +45,7 @@ class ProductCategory1Controller extends Controller
         $data->keyword_seo = $request->keyword_seo;
         $data->description_seo = $request->description_seo;
         $data->number = $request->number ?? true;
+        $data->featured = $request->featured;
         $data->hideshow = $request->hideshow;
         $data->icon = $request->icon;
         $data->img = $filename ?? 'placeholder.png';
@@ -88,7 +89,7 @@ class ProductCategory1Controller extends Controller
         $data->title_seo = $request->title_seo;
         $data->keyword_seo = $request->keyword_seo;
         $data->description_seo = $request->description_seo;
-        // $data->number = $request->number;
+        $data->featured = $request->featured;
         $data->hideshow = $request->hideshow;
         $data->icon = $request->icon;
         $data->img = $filename ?? $data->img;

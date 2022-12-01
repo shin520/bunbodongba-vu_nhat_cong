@@ -102,8 +102,8 @@ class ProductCategory2Controller extends Controller
                 $l->parent_id = $request->parent_id;
                 $l->save();
             }
-        $data->hideshow = $request->hideshow;
-        $data->featured = $request->featured;
+        $data->hideshow = $request->hideshow ?? $data->hideshow;
+        $data->featured = $request->featured ?? $data->featured;
         $data->description = $request->description;
         $data->content = $request->content;
         $data->slug = $request->slug;

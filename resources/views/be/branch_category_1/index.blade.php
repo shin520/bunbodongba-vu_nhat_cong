@@ -24,7 +24,6 @@
                         <tr>
                             <th scope="col">STT</th>
                             <th scope="col">Tên</th>
-                            <th scope="col">Xem</th>
                             <th scope="col">Nổi bật</th>
                             <th scope="col">Ẩn hiện</th>
                             <th scope="col">Hành động</th>
@@ -38,9 +37,6 @@
                                 </th>
                                 <td>
                                     @include('be.component.show_name')
-                                </td>
-                                <td>
-                                    @include('be.component.show_link')
                                 </td>
                                 <td>
                                     @include('be.component.show_featured_checkbox')

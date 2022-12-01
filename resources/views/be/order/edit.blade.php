@@ -4,53 +4,45 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">CẬP NHẬT PHẢN HỒI
+                    <h4 class="mb-sm-0 font-size-18">CẬP NHẬT ĐƠN ĐẶT BÀN
                     </h4>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Tổng Quan</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('be.feedback.index') }}">Phản hồi</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('be.contact.index') }}">Đơn Đặt Bàn</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Sửa</li>
                         </ol>
                     </div>
-
                 </div>
             </div>
         </div>
 
-        <form action="{{ route('be.feedback.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('be.contact.update', $data->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
                 <div class="col-md-3">
                     <div class="col-md-12 mb-3">
-                        @include('be.component.name_edit')
+                       @include('be.component.name_edit')
                     </div>
                     <div class="col-md-12 mb-3">
-                        @include('be.component.image_edit')
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        @include('be.component.featured_edit')
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        @include('be.component.hideshow_edit')
+                        <div class="form-group">
+                            <label for="">TÌNH TRẠNG</label>
+                            <select name="read" class="form-control">
+                                <option {{ $data->read == 1 ? 'selected' : '' }} value="1">Đã xử lí</option>
+                                <option {{ $data->read == 0 ? 'selected' : '' }} value="0">Chưa xủ lí</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            @include('be.component.url_edit')
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            @include('be.component.description_edit')
-                        </div>
-                        <div class="col-md-12 mb-3">
                             @include('be.component.content_edit')
                         </div>
                     </div>
                 </div>
-                @include('be.component.seo-edit')
-                @include('be.component.button_submit',['model'=>'feedback'])
+                @include('be.component.button_submit',['model'=>'contact'])
             </div>
         </form>
     </div>

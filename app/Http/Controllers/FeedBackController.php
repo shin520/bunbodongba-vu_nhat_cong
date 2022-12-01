@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class FeedBackController extends Controller
 {
     public function index(){
-        $data = FeedBack::where('featured', true)->orderby('number','asc')->orderby('id','desc')->get();
+        $data = FeedBack::orderby('number','asc')->orderby('id','desc')->get();
         return view('be.feedback.index',compact('data'));
     }
     public function add(){
@@ -69,9 +69,9 @@ class FeedBackController extends Controller
         $data->name = $request->name;
         $data->description = $request->description;
         $data->content = $request->content;
-        $data->number = $request->number;
+        $data->number = $request->number ?? $data->number;
         $data->url = $request->url;
-        $data->featured = $request->featured;
+        $data->featured = $request->featured ?? $data->featured;
         $data->hideshow = $request->hideshow;
         $data->img = $filename ?? $data->img;
         $data->save();
@@ -97,7 +97,7 @@ class FeedBackController extends Controller
         return redirect()->route('be.feedback.index');
     }
 
-    public function featrued(Request $request){
+    public function featured(Request $request){
         $data = FeedBack::find($request->id);
         $data->featured = $request->featured;
         $data->save();

@@ -28,6 +28,9 @@
                        @include('be.component.image_add')
                     </div>
                     <div class="col-md-12 mb-3">
+                       @include('be.component.featured_add')
+                    </div>
+                    <div class="col-md-12 mb-3">
                        @include('be.component.hideshow_add')
                     </div>
                 </div>

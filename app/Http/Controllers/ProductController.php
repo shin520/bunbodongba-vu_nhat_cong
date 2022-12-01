@@ -186,8 +186,8 @@ class ProductController extends Controller
         $data->parent_id = $request->parent_id;
         $data->slug = Str::slug($request->name);
         $data->parent_child_id = $request->parent_child_id;
-        $data->hideshow = $request->hideshow;
-        $data->featured = $request->featured;
+        $data->hideshow = $request->hideshow ?? $data->hideshow;
+        $data->featured = $request->featured ?? $data->featured ;
         $data->description = $request->description;
         $data->content = $request->content;
         $data->title_seo = $request->title_seo;
