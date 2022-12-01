@@ -202,18 +202,20 @@ class IndexController extends Controller
 
             if ($resultJson->score >= 0.3) {
 
-                ], $lang);
-                        $data_info = [
-                            'number' => true,
-                            'name' => $request->name,
-                            'phone' => $request->phone,
-                            'date' => $request->date,
-                            'people' => $request->people,
-                            'read' => $request->read,
-                        ];
-                        $contact = Contact::create($data_info);
-                    alert()->success('Đã gửi thư','Chúng tôi sẽ phản hồi lại cho bạn ngay');
-                    return back();
+                $data_info = [
+                    'number' => $request->true ?? true,
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'date' => $request->date,
+                    'people' => $request->people,
+                    'read' => $request->read,
+                    'type' => 'order',
+                ];
+
+                $contact = Contact::create($data_info);
+
+                alert()->success('Đã gửi thư','Chúng tôi sẽ phản hồi lại cho bạn ngay');
+                return back();
             } else {
                     alert()->success('Lỗi','Đã có lỗi xảy ra !');
                     return back()->withErrors(['captcha' => 'Captcha đã hết hạn']);

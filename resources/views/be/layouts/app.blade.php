@@ -94,6 +94,7 @@
 
     <script src="{{ asset('assets') }}/js/custom.js"></script>
     {{-- @include('be.layouts.myscript') --}}
+
     @include('ckfinder::setup')
     <script>
         CKFinder.config( { connectorPath: '/ckfinder/connector' } );

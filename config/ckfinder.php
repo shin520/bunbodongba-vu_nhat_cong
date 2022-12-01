@@ -31,8 +31,8 @@ $config['authentication'] = '\App\Http\Middleware\CustomCKFinderAuth';
 /* License Key ==*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
-$config['licenseName'] = 'bunbodongba.com';
-$config['licenseKey']  = 'SW2WFYPMR2XFQSW89WTPKVQ72XEJH';
+$config['licenseName'] = 'bunbodongba.local';
+$config['licenseKey']  = '1CNCFL91G44HAHFQPS7YPJ91J1CJL';
 
 /* CKFinder Internal Directory */
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_privateDir
