@@ -16,7 +16,7 @@ use App\Http\Controllers\AnalyticsController;
 |
 */
 Route::get('/', [IndexController::class, 'index'])->name('index.get');
-Route::GET('/get_location', [IndexController::class, 'get_location'])->name('get_location.get');
+Route::get('/get_location', [IndexController::class, 'get_location'])->name('get_location.get');
 Route::get('/trang-{slug}', [IndexController::class, 'page'])->name('page');
 Route::get('/san-pham/{slug}.html', [IndexController::class, 'product'])->name('product');
 Route::get('/bai-viet/{slug}.html', [IndexController::class, 'post'])->name('post');
@@ -26,9 +26,7 @@ Route::get('/gioi-thieu/{slug}.html', [IndexController::class, 'about'])->name('
 Route::get('/tuyen-dung/{slug}.html', [IndexController::class, 'recruitment'])->name('recruitment');
 Route::get('/phan-hoi/{slug}.html', [IndexController::class, 'feedback'])->name('feedback');
 Route::post('/contact-add', [IndexController::class, 'store_contact_form'])->name('store.contact');
-Route::post('/order-contact-add', [IndexController::class, 'store_order_contact_form'])->name('store.order.contact');
 Route::post('/contact', [App\Http\Controllers\HomeController::class, 'ajax_update_info_web'])->name('ajax_update_info_web');
-Route::get('change/{locale}',[IndexController::class, 'changelocale'])->name('change.locale');
 
 Auth::routes([
     'register' => true,
@@ -59,7 +57,7 @@ Route::prefix('admin')->middleware(['auth','active_account'])->group(function ()
     Route::delete('/destroy/{id}', [App\Http\Controllers\ContactController::class, 'destroy'])->name('be.contact.destroy')->middleware('permission:xem-mail-lien-he');
     Route::get('/read', [App\Http\Controllers\ContactController::class, 'read'])->name('be.contact.read')->middleware('permission:xem-mail-lien-he');
     Route::get('/number', [App\Http\Controllers\ContactController::class, 'number'])->name('be.contact.number')->middleware('permission:xem-mail-lien-he');
-    
+
     Route::get('/order', [App\Http\Controllers\ContactOrderController::class, 'index'])->name('be.order.index')->middleware('permission:xem-mail-lien-he');
 
 

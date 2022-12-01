@@ -278,7 +278,7 @@
                             <div class="d-flex flex-column align-items-center gg-10">
                                 @csrf
                                 @if ($errors->any())
-                                    <div id="error_contact" class="alert alert-danger" style="display: none">
+                                    <div id="error_contact" class="alert alert-danger">
                                         <ul style="padding-left: 0px;">
                                             @foreach ($errors->all() as $error)
                                                 <li style="line-height: 32px;">{{ $error }}</li>

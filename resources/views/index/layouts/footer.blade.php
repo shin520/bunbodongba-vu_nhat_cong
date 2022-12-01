@@ -73,6 +73,7 @@
     <script src="{{ asset('assets') }}/libs/menu/js/plugins/wow.min.js"></script>
     <script src="{{ asset('assets') }}/libs/menu/js/plugins/some-plugins.js"></script>
     <script src="{{ asset('assets') }}/libs/menu/js/main.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="text/javascript" src="{{ asset('bunbodongba') }}/slick/slick.js"></script>
     <script src="{{ asset('bunbodongba') }}/js/custom-slick.js"></script><script src="{{ asset('core') }}/frontend/js/google-translate.js"></script>
@@ -82,7 +83,6 @@
     
     <script>
         AOS.init();
-
         var btn = $('.to_topz');
         $(window).scroll(function() {
             if ($(window).scrollTop() > 300) {

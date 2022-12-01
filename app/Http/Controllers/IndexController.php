@@ -193,36 +193,34 @@ class IndexController extends Controller
                     $context = stream_context_create($options);
                     $result = file_get_contents($url, false, $context);
                     $resultJson = json_decode($result);
-                    
-                
+
+
             if ($resultJson->success != true) {
                     alert()->error('Lỗi','Captcha đã hết hạn');
                     return back()->withErrors(['captcha' => 'Captcha đã hết hạn']);
                     }
-                    
+
             if ($resultJson->score >= 0.3) {
 
-                $data_info = [
-                    'number' => $request->true ?? true,
-                    'name' => $request->name,
-                    'phone' => $request->phone,
-                    'date' => $request->date,
-                    'people' => $request->people,
-                    'read' => $request->read,
-                    'type' => 'order',
-                ];
-
-                $contact = Contact::create($data_info);
-
-                alert()->success('Đã gửi thư','Chúng tôi sẽ phản hồi lại cho bạn ngay');
-                return back();
+                ], $lang);
+                        $data_info = [
+                            'number' => true,
+                            'name' => $request->name,
+                            'phone' => $request->phone,
+                            'date' => $request->date,
+                            'people' => $request->people,
+                            'read' => $request->read,
+                        ];
+                        $contact = Contact::create($data_info);
+                    alert()->success('Đã gửi thư','Chúng tôi sẽ phản hồi lại cho bạn ngay');
+                    return back();
             } else {
                     alert()->success('Lỗi','Đã có lỗi xảy ra !');
                     return back()->withErrors(['captcha' => 'Captcha đã hết hạn']);
             }
     }
 
-    
+
     public function store_contact_form(Request $request) {
         $secret_key = Setting::first() -> captcha_secret;
         $url = 'https://www.google.com/recaptcha/api/siteverify';
